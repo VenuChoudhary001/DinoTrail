@@ -4,24 +4,27 @@ import USER_CONTEXT from '../Utility';
 import Loading from '../Pages/Loading';
 const Maps = () => {
       const [zoom, setZoom] = useState(11);
-      const {position,setPosition,setErr,list}=useContext(USER_CONTEXT);
+      const { position, setPosition, setErr, list, checkIn } =
+        useContext(USER_CONTEXT);
 
 
       useEffect(()=>{
-
-           if(navigator.geolocation){
-               navigator.geolocation.getCurrentPosition(pos=>{
-                 setPosition({
-                   latitude: pos.coords.latitude,
-                   longitude: pos.coords.longitude,
-                 });
-               
-                
-               },(err)=>console.log(err))
-           }else{
-               setErr('Ooops!Unable to determine location')
-           }
-      },[])
+          if(checkIn){
+            if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+              (pos) => {
+                setPosition({
+                  latitude: pos.coords.latitude,
+                  longitude: pos.coords.longitude,
+                });
+              },
+              (err) => console.log(err)
+            );
+          } else {
+            setErr("Ooops!Unable to determine location");
+          }}
+           
+      },[checkIn])
       
       if(!position){
           return <Loading/>

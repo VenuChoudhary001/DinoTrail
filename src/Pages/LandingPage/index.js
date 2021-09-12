@@ -1,9 +1,11 @@
-import React, {  } from 'react'
+import React, { useContext } from 'react'
 import { NavLink } from 'react-router-dom';
+import USER_CONTEXT from '../../Utility';
 
 import Dino from './Dino.png'
 
 const Landing=()=>{
+  const {setCheckIn}=useContext(USER_CONTEXT);
     return (
       <>
         <section className="hero py-4 text-white bg-dark">
@@ -26,7 +28,7 @@ const Landing=()=>{
               <div className="my-2">
                 <NavLink to='/locator'>
 
-                    <button className="btn btn-info text-white btn-lg fs-4">CHECK IN NOW</button>
+                    <button className="btn btn-info text-white btn-lg fs-4" onClick={()=>setCheckIn(true)}>CHECK IN NOW</button>
                 </NavLink>
               </div>
             </div>
